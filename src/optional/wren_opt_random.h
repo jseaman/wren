@@ -15,7 +15,7 @@ WrenForeignMethodFn wrenRandomBindForeignMethod(WrenVM* vm,
                                                 bool isStatic,
                                                 const char* signature);
 
-void wrenRandomSetDeterministic(bool fixed);
+void wrenRandomSetDeterministic(bool enabled);
 
 #endif
 
