@@ -43,11 +43,18 @@ static void randomAllocate(WrenVM* vm)
   well->index = 0;
 }
 
+static bool useFixedRandomSeed = false;
+
+void wrenRandomSetDeterministic(bool enabled)
+{
+    useFixedRandomSeed = enabled;
+}
+
 static void randomSeed0(WrenVM* vm)
 {
   Well512* well = (Well512*)wrenGetSlotForeign(vm, 0);
 
-  srand((uint32_t)time(NULL));
+  srand(useFixedRandomSeed ? 1 : (uint32_t)time(NULL));
   for (int i = 0; i < 16; i++)
   {
     well->state[i] = rand();
